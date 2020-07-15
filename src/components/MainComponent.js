@@ -6,6 +6,7 @@ import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent'
 import { CAMPSITES } from '../shared/campsites';
 import Footer from './FooterComponent';
+import Contact from './ContactComponent';
 
 class Main extends Component {
     constructor(props){
@@ -28,6 +29,7 @@ class Main extends Component {
                 <Switch>
                 <Route path="/home" component={ HomePage } />
                 <Route exact path='/directory' render={() => <Directory campsites={ this.state.campsites }  />} />
+                <Route exact path="/contactus" component={ Contact }/>
                 <Redirect to="/home" />
                 </Switch>
                 <Footer />
