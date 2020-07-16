@@ -20,13 +20,14 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
         );
     }
 
-    function RenderComments({ campsite }){
-        if(campsite.comments) {
+    function RenderComments({ comments }){
+        {console.log(comments + ' ****')}
+        if(comments) {
             return (
             <div className="col-md-5 m-1">
                 <h4>Comments</h4>
                 {
-                    campsite.comments.map(comment => {
+                    comments.map(comment => {
                     return <div key={ comment.id }>
                         <p>{comment.text}
                         <br />
@@ -47,13 +48,12 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
     }
 
     function CampsiteInfo(props){
-        const campsite = props.campsite;
-        if(props.campsite){
+        if(props){
             return (
             <div className="container">
                 <div className="row">
-                    <RenderCampsite campsite={ campsite } />
-                    <RenderComments campsite={ campsite } />
+                    <RenderCampsite campsite={ props.campsite } />
+                    <RenderComments comments={ props.comments } />
                 </div>
             </div>
             );
