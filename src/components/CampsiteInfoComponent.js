@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -37,6 +37,7 @@ import { Link } from 'react-router-dom';
                         </div>
                     })
                 }
+                <CommentForm />
             </div>
             );
         } else {
@@ -66,6 +67,13 @@ import { Link } from 'react-router-dom';
             );
         } else {
             return <div />;
+        }
+    }
+
+    class CommentForm extends Component {
+
+        render(){
+            return (<Button outline={true}><i className="fa fa-pencil" />Submit Comment</Button>);
         }
     }
 
