@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button,
+    Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { LocalForm, Control } from 'react-redux-form';
 
 
    function RenderCampsite({ campsite }){
@@ -71,9 +73,72 @@ import { Link } from 'react-router-dom';
     }
 
     class CommentForm extends Component {
+        constructor(props) {
+            super(props);
+            this.state ={
+                rating: '',
+                author: '',
+                text: '',
+                isModalOpen: false,
+            };
+
+            this.toggleModal = this.toggleModal.bind(this);
+            this.handleLogin = this.handleLogin.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        toggleModal(){
+            this.setState({ isModalOpen: !this.state.isModalOpen });
+            console.log('toggleModal clicked');
+        }
+
+        handleLogin(event){
+            this.toggleModal();
+            event.preventDefault();
+        }
+
+        handleSubmit(values) {
+            console.log('Current state is: ' + JSON.stringify(values));
+            alert('Current state is: ' + JSON.stringify(values));
+        }
 
         render(){
-            return (<Button outline={true}><i className="fa fa-pencil" />Submit Comment</Button>);
+            return (
+            <React.Fragment>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Submit a Comment</ModalHeader>
+                    <ModalBody>
+                            <LocalForm onChange={values => this.handleSubmit(values)}>
+                            <div className="form-group">
+                                <Label htmlFor="rating">Rating</Label>
+                                <Control.select model=".rating" id="rating" name="rating" className="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </Control.select >
+                            </div>
+                            <div className="form-group">
+                                <Label htmlFor="author">Your Name</Label>
+                                <Control.text 
+                                    placeholder="Your Name"
+                                    model=".author" 
+                                    id="author" 
+                                    name="author" 
+                                    className="form-control"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <Label htmlFor="comment">Comment</Label>
+                                <Control.textarea model=".text" id="text" name="text" className="form-control" rows="6" />
+                            </div>
+                                <Button type="submit" value="submit" color="primary">Submit</Button>
+                            </LocalForm>
+                    </ModalBody>
+                </Modal>
+                <Button outline={true} onClick={this.toggleModal}><i className="fa fa-pencil" />Submit Comment</Button>
+            </React.Fragment>);
         }
     }
 
