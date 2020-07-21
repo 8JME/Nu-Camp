@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button,
     Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { LocalForm, Control } from 'react-redux-form';
+import { LocalForm, Control, Errors } from 'react-redux-form';
 
+    // validation
+    const required = val => val && val.length;
+    const maxLength = len => val => !val || (val.length <= len);
+    const minLength = len => val => val && (val.length >= len);
 
    function RenderCampsite({ campsite }){
         return (
@@ -80,21 +84,18 @@ import { LocalForm, Control } from 'react-redux-form';
                 author: '',
                 text: '',
                 isModalOpen: false,
+                touched: {
+                    author: false,
+                }
             };
 
             this.toggleModal = this.toggleModal.bind(this);
-            this.handleLogin = this.handleLogin.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
         }
 
         toggleModal(){
             this.setState({ isModalOpen: !this.state.isModalOpen });
             console.log('toggleModal clicked');
-        }
-
-        handleLogin(event){
-            this.toggleModal();
-            event.preventDefault();
         }
 
         handleSubmit(values) {
@@ -108,10 +109,14 @@ import { LocalForm, Control } from 'react-redux-form';
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit a Comment</ModalHeader>
                     <ModalBody>
-                            <LocalForm onChange={values => this.handleSubmit(values)}>
+                            <LocalForm onSubmit={values => this.handleSubmit(values)}>
                             <div className="form-group">
                                 <Label htmlFor="rating">Rating</Label>
-                                <Control.select model=".rating" id="rating" name="rating" className="form-control">
+                                <Control.select 
+                                    model=".rating" 
+                                    id="rating" 
+                                    name="rating" 
+                                    className="form-control">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -127,11 +132,33 @@ import { LocalForm, Control } from 'react-redux-form';
                                     id="author" 
                                     name="author" 
                                     className="form-control"
+                                    validators={{
+                                        required,
+                                        minLength: minLength(2),
+                                        maxLength: maxLength(15)
+                                    }}
                                 />
+                                <Errors
+                                        className="text-danger"
+                                        model=".author"
+                                        show="touched"
+                                        component="div"
+                                        messages={{
+                                            required: 'Required',
+                                            minLength: 'Must be at least 2 characters',
+                                            maxLength: 'Must be 15 characters or less'
+                                        }} 
+                                    />
                             </div>
                             <div className="form-group">
                                 <Label htmlFor="comment">Comment</Label>
-                                <Control.textarea model=".text" id="text" name="text" className="form-control" rows="6" />
+                                <Control.textarea 
+                                    model=".text" 
+                                    id="text" 
+                                    name="text" 
+                                    className="form-control" 
+                                    rows="6" 
+                                />
                             </div>
                                 <Button type="submit" value="submit" color="primary">Submit</Button>
                             </LocalForm>
