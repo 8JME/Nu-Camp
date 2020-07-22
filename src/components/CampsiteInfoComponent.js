@@ -108,60 +108,60 @@ import { LocalForm, Control, Errors } from 'react-redux-form';
             <React.Fragment>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit a Comment</ModalHeader>
-                    <ModalBody>
+                        <ModalBody>
                             <LocalForm onSubmit={values => this.handleSubmit(values)}>
-                            <div className="form-group">
-                                <Label htmlFor="rating">Rating</Label>
-                                <Control.select 
-                                    model=".rating" 
-                                    id="rating" 
-                                    name="rating" 
-                                    className="form-control">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </Control.select >
-                            </div>
-                            <div className="form-group">
-                                <Label htmlFor="author">Your Name</Label>
-                                <Control.text 
-                                    placeholder="Your Name"
-                                    model=".author" 
-                                    id="author" 
-                                    name="author" 
-                                    className="form-control"
-                                    validators={{
-                                        required,
-                                        minLength: minLength(2),
-                                        maxLength: maxLength(15)
-                                    }}
-                                />
-                                <Errors
-                                        className="text-danger"
-                                        model=".author"
-                                        show="touched"
-                                        component="div"
-                                        messages={{
-                                            required: 'Required',
-                                            minLength: 'Must be at least 2 characters',
-                                            maxLength: 'Must be 15 characters or less'
-                                        }} 
+                                <div className="form-group">
+                                    <Label htmlFor="rating">Rating</Label>
+                                    <Control.select 
+                                        model=".rating" 
+                                        id="rating" 
+                                        name="rating" 
+                                        className="form-control">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </Control.select >
+                                </div>
+                                <div className="form-group">
+                                    <Label htmlFor="author">Your Name</Label>
+                                    <Control.text 
+                                        placeholder="Your Name"
+                                        model=".author" 
+                                        id="author" 
+                                        name="author" 
+                                        className="form-control"
+                                        validators={{
+                                            required,
+                                            minLength: minLength(2),
+                                            maxLength: maxLength(15)
+                                        }}
                                     />
-                            </div>
-                            <div className="form-group">
-                                <Label htmlFor="comment">Comment</Label>
-                                <Control.textarea 
-                                    model=".text" 
-                                    id="text" 
-                                    name="text" 
-                                    className="form-control" 
-                                    rows="6" 
-                                />
-                            </div>
+                                    <Errors
+                                            className="text-danger"
+                                            model=".author"
+                                            show="touched"
+                                            component="div"
+                                            messages={{
+                                                required: 'Required',
+                                                minLength: 'Must be at least 2 characters',
+                                                maxLength: 'Must be 15 characters or less'
+                                            }} 
+                                        />
+                                </div>
+                                <div className="form-group">
+                                    <Label htmlFor="comment">Comment</Label>
+                                    <Control.textarea 
+                                        model=".text" 
+                                        id="text" 
+                                        name="text" 
+                                        className="form-control" 
+                                        rows="6" 
+                                    />
+                                </div>
                                 <Button type="submit" value="submit" color="primary">Submit</Button>
-                            </LocalForm>
+                        </LocalForm>
                     </ModalBody>
                 </Modal>
                 <Button outline={true} onClick={this.toggleModal}><i className="fa fa-pencil" />Submit Comment</Button>
