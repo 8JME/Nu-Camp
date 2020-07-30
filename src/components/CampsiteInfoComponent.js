@@ -4,6 +4,7 @@ import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button,
 import { Link } from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseURL } from '../shared/baseURL';
 
     // validation
     const required = val => val && val.length;
@@ -14,7 +15,7 @@ import { Loading } from './LoadingComponent';
         return (
             <div className="col-md-5 m-1">
                 <Card>
-                    <CardImg top src={ campsite.image } alt={ campsite.name } />
+                    <CardImg top src={ baseURL + campsite.image } alt={ campsite.name } />
                     <CardBody>
                         <CardText>
                             { campsite.description }
