@@ -3,7 +3,7 @@ import Header from './HeaderComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import { addComment, fetchCampsites, fetchComments, fetchPromotions } from '../redux/ActionCreators'
+import { addComment, fetchCampsites, fetchComments, fetchPromotions } from '../redux/ActionCreators';
 import Home from './HomeComponent';
 import Directory from './DirectoryComponent';
 import About from './AboutComponent';
