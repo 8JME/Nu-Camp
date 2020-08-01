@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import { actions } from 'react-redux-form';
 
 export const Campsites = (state = {
     isLoading: true,
