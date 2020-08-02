@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row, Col, Card, CardImg, CardBody, CardTitle, CardText} from 'reactstrap';
+import {Row, Card, CardImg, CardBody, CardTitle, CardText} from 'reactstrap';
 
 
 class CampsiteInfo extends Component {
